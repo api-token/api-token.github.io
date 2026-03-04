@@ -59,20 +59,14 @@ loader.load("/models/room.glb", (glb) => {
   glb.scene.traverse((child) => {
     if (child.isMesh) {
       console.log(child.name);
-      if (child.name.includes('Wall_Art')) {
-        child.material = new THREE.MeshBasicMaterial({
-          color: 0xffffff
-        });
-      } else {
-        Object.keys(textureMap).forEach(key => {
-          if (child.name.includes(key)) {
-            const material = new THREE.MeshBasicMaterial({
-              map: loadedTextures.day[key]
-            });
-            child.material = material;
-          }
-        });
-      }
+      Object.keys(textureMap).forEach(key => {
+        if (child.name.includes(key)) {
+          const material = new THREE.MeshBasicMaterial({
+            map: loadedTextures.day[key]
+          });
+          child.material = material;
+        }
+      });
     }
   });;
 
